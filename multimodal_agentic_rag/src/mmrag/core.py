@@ -1,4 +1,4 @@
-
+# mma_rag/core.py
 from pydantic import BaseModel
 from typing import List, Dict, Optional
 from PIL import Image

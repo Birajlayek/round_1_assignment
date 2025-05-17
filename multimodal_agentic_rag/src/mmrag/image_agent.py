@@ -1,3 +1,4 @@
+# mma_rag/image_agent.py
 from transformers import CLIPProcessor, CLIPModel
 import torch
 
@@ -31,5 +32,4 @@ class ImageAnalysisAgent:
         )
 
     def _calculate_relevance(self, content_type):
-        # Implement domain-specific relevance logic
         return 0.9 if content_type in ["chart", "diagram"] else 0.3

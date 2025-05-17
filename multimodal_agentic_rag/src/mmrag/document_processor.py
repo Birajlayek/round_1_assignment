@@ -1,5 +1,5 @@
+# mma_rag/document_processor.py
 import io
-from PyPDF2 import PdfReader
 from unstructured.partition.pdf import partition_pdf
 from transformers import AutoProcessor, Blip2ForConditionalGeneration
 import torch
@@ -9,8 +9,9 @@ class MultimodalDocumentParser:
         self.processor = AutoProcessor.from_pretrained("Salesforce/blip2-opt-2.7b")
         self.model = Blip2ForConditionalGeneration.from_pretrained(
             "Salesforce/blip2-opt-2.7b", 
-            torch_dtype=torch.float16
-        ).to("cuda" if torch.cuda.is_available() else "cpu")
+            torch_dtype=torch.float16,
+            device_map="auto"
+        )
 
     def process_pdf(self, file_path: str) -> List[DocumentChunk]:
         elements = partition_pdf(
